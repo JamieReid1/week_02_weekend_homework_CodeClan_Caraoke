@@ -13,10 +13,14 @@ class TestRoom < MiniTest::Test
 
     @room_01 = Room.new("Glam Rock Room", 20)
     @room_02 = Room.new("80's Pop Room", 20)
+    @room_03 = Room.new("Rap Room", 20)
 
     @guest_01 = Guest.new("Jim Morrison", 2000.00)
     @guest_02 = Guest.new("Brian Harvey", 0.00)
     @guest_03 = Guest.new("Alice Cooper", 1000.00)
+    @guest_04 = Guest.new("Biggie Smalls", 1000.00)
+    @guest_05 = Guest.new("Eminem", 1000.00)
+    @guest_06 = Guest.new("Tupac Shakur", 1000.00)
 
   end
 
@@ -32,6 +36,12 @@ class TestRoom < MiniTest::Test
   def test_guest_can_check__in()
     @room_01.check_in(@guest_03)
     assert_equal([@guest_03], @room_01.guest_list)
+  end
+
+  def test_guest_can_check__out()
+    @room_03.guest_list = [@guest_04, @guest_05, @guest_06]
+    @room_03.check_out(@guest_06)
+    assert_equal([@guest_04, @guest_05], @room_03.guest_list)
   end
 
 
