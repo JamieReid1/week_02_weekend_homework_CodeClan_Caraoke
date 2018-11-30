@@ -5,15 +5,23 @@ require("pry")
 
 require_relative("../room")
 require_relative("../guest")
+require_relative("../song")
 
 
 class TestRoom < MiniTest::Test
 
   def setup()
 
-    @room_01 = Room.new("Glam Rock Room", 20)
-    @room_02 = Room.new("80's Pop Room", 20)
-    @room_03 = Room.new("Rap Room", 20)
+    @song_01 = Song.new("The Champs", "Tequila")
+    @song_02 = Song.new("Prince", "Purple Rain")
+    @song_03 = Song.new("Blue Swede", "Hooked On A Feeling")
+    @song_04 = Song.new("Frank Sinatra", "My Way")
+
+    @song_list = [@song_01, @song_02, @song_03]
+
+    @room_01 = Room.new("Glam Rock Room", 20, @song_list)
+    @room_02 = Room.new("80's Pop Room", 20, @song_list)
+    @room_03 = Room.new("Rap Room", 20, @song_list)
 
     @guest_01 = Guest.new("Jim Morrison", 2000.00)
     @guest_02 = Guest.new("Brian Harvey", 0.00)
@@ -33,6 +41,15 @@ class TestRoom < MiniTest::Test
     assert_equal(20, @room_01.room_capacity)
   end
 
+  def test_room_has_a_guest_list__empty()
+    assert_equal([ ], @room_01.guest_list)
+  end
+
+  def test_room_has_a_guest_list__populated()
+    @room_01.guest_list = [@guest_03]
+    assert_equal(1, @room_01.guest_list.length)
+  end
+
   def test_guest_can_check__in()
     @room_01.check_in(@guest_03)
     assert_equal([@guest_03], @room_01.guest_list)
@@ -43,6 +60,22 @@ class TestRoom < MiniTest::Test
     @room_03.check_out(@guest_06)
     assert_equal([@guest_04, @guest_05], @room_03.guest_list)
   end
+
+  def test_room_has_a_playlist()
+    assert_equal(@song_list, @room_01.playlist)
+  end
+
+  def test_edit_playlist__add()
+    @room_01.add_song(@song_04)
+    assert_equal([@song_01, @song_02, @song_03, @song_04], @room_01.playlist)
+  end
+
+  def test_edit_playlist__remove()
+    @room_01.remove_song(@song_01)
+    assert_equal([@song_02, @song_03], @room_01.playlist)
+  end
+
+
 
 
 
