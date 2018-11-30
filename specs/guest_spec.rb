@@ -4,10 +4,10 @@ require("minitest/rg")
 require("pry")
 
 require_relative("../guest")
+require_relative("../room")
 
 
 class TestGuest < MiniTest::Test
-
 
   def setup()
 
