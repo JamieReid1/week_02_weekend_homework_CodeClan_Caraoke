@@ -5,6 +5,7 @@ require("pry")
 
 require_relative("../karaoke_bar")
 require_relative("../room")
+require_relative("../guest")
 
 
 class TestKaraokeBar < MiniTest::Test
