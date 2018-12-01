@@ -14,7 +14,6 @@ class TestGuest < MiniTest::Test
 
     @karaoke_bar = KaraokeBar.new("Singers Anonymous", 5.00)
 
-
     @guest_01 = Guest.new("Jim Morrison", 2000.00)
     @guest_02 = Guest.new("Brian Harvey", 0.00)
 
@@ -34,12 +33,12 @@ class TestGuest < MiniTest::Test
   end
 
   def test_guest_can_pay_entry_fee__yes()
-    @guest_01.pay_entry_fee(@karaoke_bar)
+    @guest_01.pay_entry_fee(@karaoke_bar.entry_fee)
     assert_equal(1995.00, @guest_01.wallet)
   end
 
   def test_guest_can_pay_entry_fee__no()
-    assert_equal("Sorry guys, not tonight. I'm skint.", @guest_02.pay_entry_fee(@karaoke_bar))
+    assert_equal("Sorry guys, not tonight. I'm skint.", @guest_02.pay_entry_fee(@karaoke_bar.entry_fee))
   end
 
 

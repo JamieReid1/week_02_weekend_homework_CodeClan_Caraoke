@@ -10,7 +10,11 @@ class KaraokeBar
     @entry_fee = entry_fee
     @bar_till = 0.00
 
+  end
 
+  def charge_entry_fee(guest)
+    @bar_till += @entry_fee
+    guest.wallet -= @entry_fee
   end
 
 

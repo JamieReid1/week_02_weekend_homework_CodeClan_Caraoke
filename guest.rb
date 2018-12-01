@@ -1,8 +1,8 @@
 
 class Guest
 
-  attr_reader :guest_name, :wallet
-  attr_writer :wallet
+  attr_reader :guest_name, :wallet, :pay_entry_fee
+  attr_writer :wallet, :pay_entry_fee
 
   def initialize(guest_name, wallet)
 
@@ -12,10 +12,10 @@ class Guest
   end
 
 
-  def pay_entry_fee(karaoke_bar)
-    if @wallet >= karaoke_bar.entry_fee
-      @wallet -= karaoke_bar.entry_fee
-    elsif @wallet < karaoke_bar.entry_fee
+  def pay_entry_fee(entry_fee)
+      if @wallet >= entry_fee
+      @wallet -= entry_fee
+    elsif @wallet < entry_fee
       return "Sorry guys, not tonight. I'm skint."
     end
   end

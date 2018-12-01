@@ -14,6 +14,9 @@ class TestKaraokeBar < MiniTest::Test
 
     @karaoke_bar = KaraokeBar.new("Singers Anonymous", 5.00)
 
+    @guest_01 = Guest.new("Jim Morrison", 2000.00)
+    @guest_02 = Guest.new("Brian Harvey", 0.00)
+
   end
 
 
@@ -30,9 +33,9 @@ class TestKaraokeBar < MiniTest::Test
   end
 
   def test_karaoke_bar_till_can_take_money()
-
+    @karaoke_bar.charge_entry_fee(@guest_01)
+    assert_equal(5.00, @karaoke_bar.bar_till)
   end
-
 
 
 end
