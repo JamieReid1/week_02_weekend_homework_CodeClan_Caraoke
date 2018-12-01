@@ -11,7 +11,7 @@ class TestKaraokeBar < MiniTest::Test
 
   def setup
 
-    @karaoke_bar = KaraokeBar.new("Singers Anonymous")
+    @karaoke_bar = KaraokeBar.new("Singers Anonymous", 5.00)
 
   end
 
@@ -20,11 +20,15 @@ class TestKaraokeBar < MiniTest::Test
     assert_equal("Singers Anonymous", @karaoke_bar.bar_name)
   end
 
-  def test_bar_has_a_till__empty()
+  def test_karaoke_bar_has_an_entry_fee()
+    assert_equal(5.00, @karaoke_bar.entry_fee)
+  end
+
+  def test_karaoke_bar_has_a_till__empty()
       assert_equal(0.00, @karaoke_bar.bar_till)
   end
 
-  def test_bar_till_can_take_money()
+  def test_karaoke_bar_till_can_take_money()
 
   end
 
