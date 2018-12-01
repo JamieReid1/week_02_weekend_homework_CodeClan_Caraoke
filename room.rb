@@ -15,7 +15,11 @@ class Room
   end
 
   def check_in(guest)
-    @guest_list << guest
+    if @guest_list.length < @room_capacity
+      @guest_list << guest
+    else
+      return "Sorry, no more room. Please wait at the bar." 
+    end
   end
 
   def check_out(guest)

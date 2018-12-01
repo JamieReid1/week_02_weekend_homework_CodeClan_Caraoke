@@ -6,6 +6,7 @@ require("pry")
 require_relative("../room")
 require_relative("../guest")
 require_relative("../song")
+require_relative("../karaoke_bar")
 
 
 class TestRoom < MiniTest::Test
@@ -19,9 +20,9 @@ class TestRoom < MiniTest::Test
 
     @song_list = [@song_01, @song_02, @song_03]
 
-    @room_01 = Room.new("Glam Rock Room", 20, @song_list)
-    @room_02 = Room.new("80's Pop Room", 20, @song_list)
-    @room_03 = Room.new("Rap Room", 20, @song_list)
+    @room_01 = Room.new("Glam Rock Room", 4, @song_list)
+    @room_02 = Room.new("80's Pop Room", 4, @song_list)
+    @room_03 = Room.new("Rap Room", 4, @song_list)
 
     @guest_01 = Guest.new("Jim Morrison", 2000.00)
     @guest_02 = Guest.new("Brian Harvey", 0.00)
@@ -38,7 +39,7 @@ class TestRoom < MiniTest::Test
   end
 
   def test_room_has_a_cpacity()
-    assert_equal(20, @room_01.room_capacity)
+    assert_equal(4, @room_01.room_capacity)
   end
 
   def test_room_has_a_guest_list__empty()
@@ -61,6 +62,12 @@ class TestRoom < MiniTest::Test
     assert_equal([@guest_04, @guest_05], @room_03.guest_list)
   end
 
+  def test_guest_cannot_check_in_over_capacity()
+    @room_03.guest_list = [@guest_01, @guest_02, @guest_03, @guest_04]
+    @room_03.check_in(@guest_05)
+    assert_equal("Sorry, no more room. Please wait at the bar.", @room_03.check_in(@guest_05))
+  end
+
   def test_room_has_a_playlist()
     assert_equal(@song_list, @room_01.playlist)
   end
@@ -74,6 +81,8 @@ class TestRoom < MiniTest::Test
     @room_01.remove_song(@song_01)
     assert_equal([@song_02, @song_03], @room_01.playlist)
   end
+
+
 
 
 
