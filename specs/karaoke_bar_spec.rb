@@ -6,6 +6,7 @@ require("pry")
 require_relative("../karaoke_bar")
 require_relative("../room")
 require_relative("../guest")
+require_relative("../song")
 
 
 class TestKaraokeBar < MiniTest::Test
@@ -14,8 +15,10 @@ class TestKaraokeBar < MiniTest::Test
 
     @karaoke_bar = KaraokeBar.new("Singers Anonymous", 5.00)
 
-    @guest_01 = Guest.new("Jim Morrison", 2000.00)
-    @guest_02 = Guest.new("Brian Harvey", 0.00)
+    @song_01 = Song.new("The Champs", "Tequila")
+
+    @guest_01 = Guest.new("Jim Morrison", 2000.00, @song_01)
+    @guest_02 = Guest.new("Brian Harvey", 0.00, Song.new("Aqua", "Barbie Girl"))
 
   end
 

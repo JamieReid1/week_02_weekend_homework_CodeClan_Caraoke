@@ -17,6 +17,7 @@ class TestRoom < MiniTest::Test
     @song_02 = Song.new("Prince", "Purple Rain")
     @song_03 = Song.new("Blue Swede", "Hooked On A Feeling")
     @song_04 = Song.new("Frank Sinatra", "My Way")
+    @song_05 = Song.new("The Doors", "Break on Through")
 
     @song_list = [@song_01, @song_02, @song_03]
 
@@ -24,12 +25,12 @@ class TestRoom < MiniTest::Test
     @room_02 = Room.new("80's Pop Room", 4, @song_list)
     @room_03 = Room.new("Rap Room", 4, @song_list)
 
-    @guest_01 = Guest.new("Jim Morrison", 2000.00)
-    @guest_02 = Guest.new("Brian Harvey", 0.00)
-    @guest_03 = Guest.new("Alice Cooper", 1000.00)
-    @guest_04 = Guest.new("Biggie Smalls", 1000.00)
-    @guest_05 = Guest.new("Eminem", 1000.00)
-    @guest_06 = Guest.new("Tupac Shakur", 1000.00)
+    @guest_01 = Guest.new("Jim Morrison", 2000.00, @song_01)
+    @guest_02 = Guest.new("Brian Harvey", 0.00, Song.new("Aqua", "Barbie Girl"))
+    @guest_03 = Guest.new("Alice Cooper", 1000.00, @song_02)
+    @guest_04 = Guest.new("Biggie Smalls", 1000.00, @song_03)
+    @guest_05 = Guest.new("Eminem", 1000.00, @song_04)
+    @guest_06 = Guest.new("Tupac Shakur", 1000.00, @song_05)
 
   end
 
@@ -63,9 +64,9 @@ class TestRoom < MiniTest::Test
   end
 
   def test_guest_cannot_check_in_over_capacity()
-    @room_03.guest_list = [@guest_01, @guest_02, @guest_03, @guest_04]
-    @room_03.check_in(@guest_05)
-    assert_equal("Sorry, no more room. Please wait at the bar.", @room_03.check_in(@guest_05))
+    @room_02.guest_list = [@guest_01, @guest_02, @guest_03, @guest_04]
+    @room_02.check_in(@guest_05)
+    assert_equal("Sorry, no more room. Please wait at the bar.", @room_02.check_in(@guest_05))
   end
 
   def test_room_has_a_playlist()
